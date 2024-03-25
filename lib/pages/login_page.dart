@@ -1,4 +1,7 @@
+import 'package:e_commerce_api/pages/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../Models/login_request_Model.dart';
 
 import '../Services/Auth_Services.dart';
@@ -10,13 +13,20 @@ class LoginPage extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    double width =  MediaQuery.of(context).size.width;
-
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    double height = MediaQuery
+        .of(context)
+        .size
+        .height;
 
     loginHandler() async {
-      String? token = await ApiService().login(
+      String? token = await ApiService.login(
           LoginModel(username: emailController.text, password: passwordController.text)
       );
+      print(token);
       if (token != null) {
         Navigator.pushReplacementNamed(context, '/HomePage', arguments: token);
       } else {
@@ -25,14 +35,16 @@ class LoginPage extends StatelessWidget {
 
 
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Login"),
+        ),
+      body:
+      SingleChildScrollView(
+        child: Padding(
+        padding:  EdgeInsets.only(left:  width *  0.1 , top: height*0.15 , right:  width *  0.1),
+           child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
 
-      body: Container(
-        margin: EdgeInsets.only(left: width*0.1),
-        width: width*0.8,
-        child : Center(
-          child: Column
-            (
-            mainAxisAlignment:  MainAxisAlignment.center,
             children: [
               const Text(
                 'Welcome Back',
@@ -68,7 +80,7 @@ class LoginPage extends StatelessWidget {
                     hintText: 'Password'
                 ),
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 30,),
               ElevatedButton(
                   onPressed :()
                   {
@@ -79,7 +91,13 @@ class LoginPage extends StatelessWidget {
                       backgroundColor: Colors.deepPurple
                   ),
                   child : const Text('Login')),
-
+              const SizedBox(height: 10,),
+              TextButton(
+                onPressed: () {
+                  Get.to(RegisterPage());
+                },
+                child: const Text("Register"),
+              )
             ],
 
           ),

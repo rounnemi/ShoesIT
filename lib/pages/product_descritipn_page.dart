@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
-
 class ProductDescription extends StatelessWidget {
-  const ProductDescription({Key? key});
+  final String title;
+  final String imageURL;
+  final int price;
+  final String description;
+  final String offreTag;
+
+  const ProductDescription({
+    Key? key,
+    required this.title,
+    required this.imageURL,
+    required this.price,
+    required this.description,
+    required this.offreTag,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +32,7 @@ class ProductDescription extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                "https://cdn-images.farfetch-contents.com/16/13/43/94/16134394_50014366_480.jpg",
+                imageURL,
                 fit: BoxFit.contain,
                 width: double.infinity,
                 height: 200,
@@ -28,7 +40,7 @@ class ProductDescription extends StatelessWidget {
             ),
             const SizedBox(height: 20),
              Text(
-              "Sandales",
+              title,
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
@@ -38,7 +50,7 @@ class ProductDescription extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              "RS :300",
+              "RS :$price",
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.green,

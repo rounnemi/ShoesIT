@@ -18,7 +18,7 @@ class RegisterModel {
     final data = <String, dynamic>{};
     data['username'] = username;
     data['password'] = password;
-    data ['seller'] =false;
+    data ['seller'] = "false";
     return data;
   }
 }
